@@ -104,4 +104,63 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 2000);
     }
   });
+
+// Typewriter: "Hi, I am Kamesh Dubey" with space reservation
+document.addEventListener("DOMContentLoaded", () => {
+  const target = document.getElementById("heroTitle");
+  if (!target) return;
+
+  // First create the wrapper to maintain layout with line breaks after "I am" and after "Kamesh"
+  target.innerHTML = `<span id="heroWrapper" style="visibility: hidden">Hi, I am <br><span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span></span>`;
   
+  // Create visible text container that will be animated
+  const animatedText = document.createElement("span");
+  animatedText.id = "animatedText";
+  animatedText.style.position = "absolute";
+  target.prepend(animatedText);
+  
+  const parts = [
+    { text: "Hi, I am ", className: null, speed: 30},
+    { text: "<br>", isHTML: true, speed: 10 },
+    { text: "Kamesh", className: "hero-name", speed: 100 },
+    { text: "<br>", isHTML: true, speed: 10 },
+    { text: "Dubey", className: "hero-name", speed: 100 },
+  ];
+
+  let partIdx = 0;
+  function typePart() {
+    if (partIdx >= parts.length) return;
+
+    const { text, className, isHTML, speed } = parts[partIdx];
+    
+    if (isHTML) {
+      // Handle HTML elements like <br>
+      animatedText.innerHTML += text;
+      partIdx += 1;
+      setTimeout(() => typePart(), speed);
+      return;
+    }
+    
+    const node = className ? document.createElement("span") : document.createTextNode("");
+    if (className) node.className = className;
+    animatedText.appendChild(node);
+
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i >= text.length) {
+        clearInterval(timer);
+        partIdx += 1;
+        typePart();
+        return;
+      }
+      if (className) {
+        node.textContent += text.charAt(i);
+      } else {
+        node.textContent += text.charAt(i);
+      }
+      i += 1;
+    }, speed);
+  }
+
+  typePart();
+});
