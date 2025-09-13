@@ -125,13 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
     { text: "Kamesh", className: "hero-name", speed: 100 },
     { text: "<br>", isHTML: true, speed: 10 },
     { text: "Dubey", className: "hero-name", speed: 100 },
+    { text: "...", className: "hero-name", speed: 190, infinite: true },
   ];
 
   let partIdx = 0;
   function typePart() {
     if (partIdx >= parts.length) return;
 
-    const { text, className, isHTML, speed } = parts[partIdx];
+    const { text, className, isHTML, speed, infinite } = parts[partIdx];
     
     if (isHTML) {
       // Handle HTML elements like <br>
@@ -144,6 +145,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const node = className ? document.createElement("span") : document.createTextNode("");
     if (className) node.className = className;
     animatedText.appendChild(node);
+
+    if (infinite) {
+      // Handle infinite dots animation
+      let dotCount = 0;
+      const maxDots = 3;
+      const dotsTimer = setInterval(() => {
+        if (dotCount < maxDots) {
+          node.textContent += ".";
+          dotCount++;
+        } else {
+          node.textContent = node.textContent.replace(/\.+$/, "");
+          dotCount = 0;
+        }
+      }, speed * 3);
+      return; // Don't proceed to next part for infinite animation
+    }
 
     let i = 0;
     const timer = setInterval(() => {
