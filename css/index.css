@@ -199,6 +199,8 @@ nav li {
   display: flex;
   flex-direction: column;
   flex-basis: 50%;
+  min-height: 200px;
+  height: 200px;
 }
 
 .hero-name {
@@ -429,6 +431,11 @@ footer small {
   .hero h1,
   .hero-about {
     width: 100%;
+  }
+
+  .hero h1 {
+    min-height: 150px;
+    height: 150px;
   }
 
   .project .section-title {
