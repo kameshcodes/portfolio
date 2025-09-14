@@ -711,7 +711,7 @@ nav .link {
 
 /* Blinking final dot */
 .blinking-dot {
-  animation: dot-blink 1s infinite;
+  animation: dot-blink 1.5s infinite;
   color: var(--primary);
 }
 

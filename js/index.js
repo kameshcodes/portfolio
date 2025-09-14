@@ -130,8 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize TypeIt with realistic human-like typing
   new TypeIt(target, {
-    speed: 100,          // Average typing speed
-    deleteSpeed: 150,     // Speed for corrections
+    speed: 70,          // Average typing speed
+    deleteSpeed: 120,     // Speed for corrections
     lifeLike: true,      // Variable delays to mimic human typing
     cursor: false,       // No cursor during or after typing
     loop: false,         // Don't repeat
@@ -155,9 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .type("Hi, I'm ")
   .pause(200)           // Natural pause before name
-  .type('<span class="hero-name">Kamesh</span><br><span class="hero-name">dubey</span>', { html: true }) // Intentionally lowercase first
-  .pause(800)           // Pause to "notice" the error
-  .delete(5)           // Delete only "dubey"
+  .type('<span class="hero-name">Kamesh</span><br><span class="hero-name">dube</span>', { html: true }) // Intentionally lowercase first
+  .pause(700)           // Pause to "notice" the error
+  .delete(4)           
   .pause(300)           // Brief pause before correction
   .type('<span class="hero-name">Dubey</span>', { html: true }) // Correct only "Dubey"
   .pause(400)           // Pause before dots
