@@ -105,79 +105,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-// Typewriter: "Hi, I am Kamesh Dubey" with space reservation
+// TypeIt: "Hi, I'm Kamesh Dubey..." with realistic typing effect and error correction
 document.addEventListener("DOMContentLoaded", () => {
+  console.log('DOM loaded, starting TypeIt setup');
   const target = document.getElementById("heroTitle");
-  if (!target) return;
-
-  // First create the wrapper to maintain layout with line breaks after "I am" and after "Kamesh"
-  target.innerHTML = `<span id="heroWrapper" style="visibility: hidden">Hi, I am <br><span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span></span>`;
   
-  // Create visible text container that will be animated
-  const animatedText = document.createElement("span");
-  animatedText.id = "animatedText";
-  animatedText.style.position = "absolute";
-  target.prepend(animatedText);
-  
-  const parts = [
-    { text: "Hi, I am ", className: null, speed: 30},
-    { text: "<br>", isHTML: true, speed: 10 },
-    { text: "Kamesh", className: "hero-name", speed: 100 },
-    { text: "<br>", isHTML: true, speed: 10 },
-    { text: "Dubey", className: "hero-name", speed: 100 },
-    { text: "...", className: "hero-name", speed: 190, infinite: true },
-  ];
-
-  let partIdx = 0;
-  function typePart() {
-    if (partIdx >= parts.length) return;
-
-    const { text, className, isHTML, speed, infinite } = parts[partIdx];
-    
-    if (isHTML) {
-      // Handle HTML elements like <br>
-      animatedText.innerHTML += text;
-      partIdx += 1;
-      setTimeout(() => typePart(), speed);
-      return;
-    }
-    
-    const node = className ? document.createElement("span") : document.createTextNode("");
-    if (className) node.className = className;
-    animatedText.appendChild(node);
-
-    if (infinite) {
-      // Handle infinite dots animation
-      let dotCount = 0;
-      const maxDots = 3;
-      const dotsTimer = setInterval(() => {
-        if (dotCount < maxDots) {
-          node.textContent += ".";
-          dotCount++;
-        } else {
-          node.textContent = node.textContent.replace(/\.+$/, "");
-          dotCount = 0;
-        }
-      }, speed * 3);
-      return; // Don't proceed to next part for infinite animation
-    }
-
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i >= text.length) {
-        clearInterval(timer);
-        partIdx += 1;
-        typePart();
-        return;
-      }
-      if (className) {
-        node.textContent += text.charAt(i);
-      } else {
-        node.textContent += text.charAt(i);
-      }
-      i += 1;
-    }, speed);
+  if (!target) {
+    console.error('Target element not found');
+    return;
   }
 
-  typePart();
+  // Clear any existing content first
+  target.innerHTML = '';
+
+  // Check if TypeIt is available
+  if (typeof TypeIt === 'undefined') {
+    console.log('TypeIt not loaded, using fallback');
+    // Fallback to complete text
+    target.innerHTML = 'Hi, I\'m <br><span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span>';
+    return;
+  }
+
+  console.log('TypeIt loaded successfully');
+
+  // Initialize TypeIt with realistic human-like typing
+  new TypeIt(target, {
+    speed: 100,          // Average typing speed
+    deleteSpeed: 150,     // Speed for corrections
+    lifeLike: true,      // Variable delays to mimic human typing
+    cursor: false,       // No cursor during or after typing
+    loop: false,         // Don't repeat
+    waitUntilVisible: true, // Start when element is visible
+    afterComplete: function(instance) {
+      // Make only the final dot blink
+      console.log('TypeIt completed, making final dot blink');
+      const targetElement = instance.getElement();
+      console.log('Current HTML:', targetElement.innerHTML);
+      
+      // Find the span containing "..." and replace the last dot
+      const heroSpans = targetElement.querySelectorAll('.hero-name');
+      heroSpans.forEach((span, index) => {
+        console.log(`Span ${index}: "${span.textContent}"`);
+        if (span.textContent === '...') {
+          console.log('Found dots span, making last dot blink');
+          span.innerHTML = '..<span class="blinking-dot">.</span>';
+        }
+      });
+    }
+  })
+  .type("Hi, I'm ")
+  .pause(200)           // Natural pause before name
+  .type('<span class="hero-name">Kamesh</span><br><span class="hero-name">dubey</span>', { html: true }) // Intentionally lowercase first
+  .pause(800)           // Pause to "notice" the error
+  .delete(5)           // Delete only "dubey"
+  .pause(300)           // Brief pause before correction
+  .type('<span class="hero-name">Dubey</span>', { html: true }) // Correct only "Dubey"
+  .pause(400)           // Pause before dots
+  .type('<span class="hero-name">...</span>', { html: true })          // Add three dots at the end
+  .go();                // Start the animation
 });

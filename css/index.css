@@ -701,3 +701,61 @@ nav .link {
   z-index: 1;
   box-shadow: var(--container-shadow);
 }
+
+/* Blinking final dot */
+.blinking-dot {
+  animation: dot-blink 1s infinite;
+  color: var(--primary);
+}
+
+/* Blinking letter "y" in Dubey */
+.blinking-y {
+  animation: letter-blink 0.8s infinite;
+  color: var(--primary) !important;
+  font-weight: bold;
+}
+
+/* Blinking cursor after typing completes */
+.blinking-cursor {
+  color: var(--primary);
+  animation: cursor-blink 1s infinite;
+  font-size: 1em;
+  display: inline-block;
+  margin-left: 2px;
+}
+
+/* Legacy fallback blinking dots */
+.blinking-dots {
+  color: var(--primary);
+  animation: cursor-blink 1s infinite;
+  font-size: 1em;
+  display: inline-block;
+  margin-left: 0;
+}
+
+@keyframes dot-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes letter-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
