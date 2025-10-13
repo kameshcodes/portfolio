@@ -216,12 +216,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Solution:</strong> Developed an intelligent ETL pipeline that integrates GenAI reasoning with Python logic to automatically identify and standardize Statement-of-Value (SOV) sheets within complex Excel workbooks, generate a clean, downloadable standardized file, and update the database, eliminating the need for manual rule maintenance.</p>
         
         
-        <p><strong>Impact:</strong> Pipeline automatically adapts to new workbook layouts without manual rule updates, traditional ETL would require constant maintenance.</p>
+        <p><strong>Impact:</strong> Pipeline automatically adapts to new workbook layouts without manual rule updates—traditional ETL would require constant maintenance.</p>
 
         <h3>Phase 2: Query Filtering to Save API Costs</h3>
         <p><strong>Problem:</strong> OpenAI API calls are expensive, and irrelevant queries waste both money and time.</p>
         
-        <p><strong>Solution:</strong> Built an intelligent pre-filter using a fine-tuned <strong>DistilBERT classifier (F1: 99.54%)</strong> that curates training data, trains on insurance vs. general queries, and deploys as a gatekeeper before the main chatbot.</p>
+        <p><strong>Solution:</strong> Built an intelligent pre-filter using a fine-tuned <strong>DistilBERT classifier (F1: 99.54%)</strong>. Collaborated with the business team to manually label 100 high-quality insurance vs. general query samples, then leveraged AI-powered data augmentation to generate 1,900 synthetic examples, creating a robust 2,000-sample training dataset. After fine-tuning, deployed the model as a gatekeeper to filter queries before they reach the expensive OpenAI API.</p>
         
         <div style="background-color: rgba(240, 242, 245, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0;">
           <p style="margin: 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Write all the prime numbers less than 100"</em></p>
