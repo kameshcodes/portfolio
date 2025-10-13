@@ -830,22 +830,22 @@ nav .link {
   background-color: rgba(42, 42, 42, 0.8) !important;
 }
 
-/* Bot label styling - primary color in light mode */
+/* Bot label styling - blue in both light and dark mode */
 .bot-label {
-  color: var(--primary);
+  color: #0066cc !important;
 }
 
-/* Bot label in dark mode - darker blue (needs !important to override strong color) */
+/* Bot label in dark mode - lighter blue (needs !important to override strong color) */
 .body-dark .bot-label {
   color: #4a9eff !important;
 }
 
-/* Phase label styling - primary color in light mode */
+/* Phase label styling - blue in light mode */
 .phase-label {
-  color: var(--primary);
+  color: #0066cc !important;
 }
 
-/* Phase label in dark mode - darker blue */
+/* Phase label in dark mode - lighter blue */
 .body-dark .phase-label {
   color: #4a9eff !important;
 }
