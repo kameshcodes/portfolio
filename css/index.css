@@ -805,6 +805,51 @@ nav .link {
   position: relative;
 }
 
+/* Ensure modal is opaque in dark mode */
+.body-dark .modal-content {
+  background-color: #1a1a1a;
+}
+
+/* Ensure text is white in dark mode, not blue */
+.body-dark .modal-body,
+.body-dark .modal-body p,
+.body-dark .modal-body h2,
+.body-dark .modal-body h3,
+.body-dark .modal-body strong {
+  color: #ffffff;
+}
+
+/* Dark mode: darker background for metadata and example boxes */
+.body-dark .modal-body .project-meta {
+  background-color: #2a2a2a;
+  border-left-color: #4a9eff;
+}
+
+/* Dark mode: darker background for example/solution boxes */
+.body-dark .modal-body div[style*="background-color: rgba(240, 242, 245"] {
+  background-color: rgba(42, 42, 42, 0.8) !important;
+}
+
+/* Bot label styling - primary color in light mode */
+.bot-label {
+  color: var(--primary);
+}
+
+/* Bot label in dark mode - darker blue (needs !important to override strong color) */
+.body-dark .bot-label {
+  color: #4a9eff !important;
+}
+
+/* Phase label styling - primary color in light mode */
+.phase-label {
+  color: var(--primary);
+}
+
+/* Phase label in dark mode - darker blue */
+.body-dark .phase-label {
+  color: #4a9eff !important;
+}
+
 @keyframes slideDown {
   from {
     transform: translateY(-50px);

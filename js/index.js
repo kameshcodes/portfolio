@@ -200,11 +200,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <div style="font-family: 'Söhne', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
             <p style="margin: 0.5rem 0; text-align: center;"><strong style="font-size: 1.05rem;">Raw Excel Files</strong></p>
             <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
-            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 1:</span> ETL Pipeline → Clean & standardize data</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span class="phase-label" style="font-weight: 600;">Phase 1:</span> ETL Pipeline → Clean & standardize data</p>
             <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
-            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 2:</span> Query Filter → Block off-topic queries</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span class="phase-label" style="font-weight: 600;">Phase 2:</span> Query Filter → Block off-topic queries</p>
             <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
-            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 3:</span> Chatbot Pipeline→ Retrieve & generate insights</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span class="phase-label" style="font-weight: 600;">Phase 3:</span> Chatbot Pipeline→ Retrieve & generate insights</p>
             <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
             <p style="margin: 0.5rem 0; text-align: center;"><strong style="font-size: 1.05rem;">Conversational Insights</strong></p>
           </div>
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         <div style="background-color: rgba(240, 242, 245, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0;">
           <p style="margin: 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Write all the prime numbers less than 100"</em></p>
-          <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> "I apologize, but I can only help with insurance and underwriting-related questions."</p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;"><strong class="bot-label">Bot:</strong> "I apologize, but I can only help with insurance and underwriting-related questions."</p>
         </div>
         
         <p><strong>Impact:</strong> Reduced redundant API calls, significantly cutting costs while maintaining 100% context relevance.</p>
@@ -237,9 +237,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
         <div style="background-color: rgba(240, 242, 245, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0;">
           <p style="margin: 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Summarize exposure by region"</em></p>
-          <p style="margin: 0.5rem 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> [Returns summary table with regions and total values]</p>
+          <p style="margin: 0.5rem 0; font-size: 0.9rem;"><strong class="bot-label">Bot:</strong> [Returns summary table with regions and total values]</p>
           <p style="margin: 1rem 0 0.5rem 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Make that a bar chart instead"</em></p>
-          <p style="margin: 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> [Converts to visualization instantly]</p>
+          <p style="margin: 0; font-size: 0.9rem;"><strong class="bot-label">Bot:</strong> [Converts to visualization instantly]</p>
         </div>
         
         <p><strong>Impact:</strong> Underwriters can explore SOV data through conversation rather than manual spreadsheet analysis, reducing analysis time from days to minutes.</p>
