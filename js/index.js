@@ -164,3 +164,131 @@ document.addEventListener("DOMContentLoaded", () => {
   .type('<span class="hero-name">...</span>', { html: true })          // Add three dots at the end
   .go();                // Start the animation
 });
+
+// Project Modal Functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("projectModal");
+  const modalBody = document.getElementById("modalBody");
+  const closeBtn = document.querySelector(".modal-close");
+  
+  // Project data
+  const projectData = {
+    "sov-chatbot": {
+      title: "SOV Chatbot for Underwriters",
+      content: `
+        <div class="project-meta">
+          <p><strong>Organization:</strong> Bluepond AI, Chennai</p>
+          <p><strong>Role:</strong> Data Science Intern</p>
+          <p><strong>Mentor:</strong> Sunyam Bagga</p>
+          <p><strong>Tech Stack:</strong> Python, PyTorch, LangChain, SQL, Pandas, OpenAI API, Transformers (DistilBERT, Sentence Transformers)</p>
+        </div>
+
+        <p>This project transforms how underwriters work with SOV Excel files, turning hours of manual data cleaning into seconds and days spreadsheet analysis into minutes of natural conversation with an AI assistant.</p>
+
+
+        <h3>System Overview</h3>
+
+        <div style="text-align: center; margin: 2rem 0;">
+          <img src="./public/sov-chatbot-system-design.png" alt="SOV Chatbot System Design" style="max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);" />
+        </div>
+
+        <br>
+
+        <p>The system works in three connected phases:</p>
+        
+        <div style="background-color: rgba(240, 242, 245, 0.5); padding: 2rem; border-radius: 0.75rem; margin: 1.5rem 0; border: 1px solid rgba(0, 0, 0, 0.08);">
+          <div style="font-family: 'Söhne', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <p style="margin: 0.5rem 0; text-align: center;"><strong style="font-size: 1.05rem;">Raw Excel Files</strong></p>
+            <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 1:</span> ETL Pipeline → Clean & standardize data</p>
+            <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 2:</span> Query Filter → Block off-topic queries</p>
+            <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><span style="color: var(--primary); font-weight: 600;">Phase 3:</span> Chatbot Pipeline→ Retrieve & generate insights</p>
+            <p style="margin: 0.5rem 0; text-align: center; color: var(--primary); font-size: 1.2rem;">↓</p>
+            <p style="margin: 0.5rem 0; text-align: center;"><strong style="font-size: 1.05rem;">Conversational Insights</strong></p>
+          </div>
+        </div>
+
+        <h3>Phase 1: Data Processing & ETL</h3>
+        <p><strong>Problem:</strong> Different underwriters have their SOV Excel files in various formats like multi-tab workbooks, irregular headers, inconsistent structures that make traditional ETL pipelines break.</p>
+        
+        <p><strong>Solution:</strong> Developed an intelligent ETL pipeline that integrates GenAI reasoning with Python logic to automatically identify and standardize Statement-of-Value (SOV) sheets within complex Excel workbooks, generate a clean, downloadable standardized file, and update the database, eliminating the need for manual rule maintenance.</p>
+        
+        
+        <p><strong>Impact:</strong> Pipeline automatically adapts to new workbook layouts without manual rule updates, traditional ETL would require constant maintenance.</p>
+
+        <h3>Phase 2: Query Filtering to Save API Costs</h3>
+        <p><strong>Problem:</strong> OpenAI API calls are expensive, and irrelevant queries waste both money and time.</p>
+        
+        <p><strong>Solution:</strong> Built an intelligent pre-filter using a fine-tuned <strong>DistilBERT classifier (F1: 99.54%)</strong> that curates training data, trains on insurance vs. general queries, and deploys as a gatekeeper before the main chatbot.</p>
+        
+        <div style="background-color: rgba(240, 242, 245, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0;">
+          <p style="margin: 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Write all the prime numbers less than 100"</em></p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> "I apologize, but I can only help with insurance and underwriting-related questions."</p>
+        </div>
+        
+        <p><strong>Impact:</strong> Reduced redundant API calls, significantly cutting costs while maintaining 100% context relevance.</p>
+
+        <h3>Phase 3: RAG Chatbot Implementation</h3>
+        <p><strong>Problem:</strong> Underwriters need to analyze portfolio data quickly but manual spreadsheet analysis takes hours and requires SQL knowledge.</p>
+        
+        <p><strong>Solution:</strong> Built a <strong>Retrieval-Augmented Generation (RAG)</strong> system using <strong>LangChain + OpenAI API</strong> that converts natural language to SQL queries, retrieves relevant data, and intelligently formats responses (tables, charts, or text) with conversation memory for follow-ups.</p>
+        
+        <div style="background-color: rgba(240, 242, 245, 0.5); padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1rem 0;">
+          <p style="margin: 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Summarize exposure by region"</em></p>
+          <p style="margin: 0.5rem 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> [Returns summary table with regions and total values]</p>
+          <p style="margin: 1rem 0 0.5rem 0; font-size: 0.9rem;"><strong>User:</strong> <em>"Make that a bar chart instead"</em></p>
+          <p style="margin: 0; font-size: 0.9rem;"><strong style="color: var(--primary);">Bot:</strong> [Converts to visualization instantly]</p>
+        </div>
+        
+        <p><strong>Impact:</strong> Underwriters can explore SOV data through conversation rather than manual spreadsheet analysis, reducing analysis time from days to minutes.</p>
+
+        <h3>What I learned</h3>
+        <p>Beyond the tech side of the project, I learned that building useful AI is about reliability and trust, not complexity. The real value came from thoughtful system design. Intelligent query filtering eliminated hallucinations and cut costs, the hybrid ETL pipeline proved that GenAI + Python logic can create stable systems, and the RAG architecture compressed days of analysis into minutes.</p>
+      `
+    }
+  };
+
+  // Open modal when clicking on project containers
+  document.querySelectorAll(".project-clickable").forEach(container => {
+    container.addEventListener("click", (e) => {
+      // Prevent opening modal if clicking on a link
+      if (e.target.tagName === "A" || e.target.closest("a")) {
+        return;
+      }
+
+      const projectId = container.getAttribute("data-project");
+      const project = projectData[projectId];
+      
+      if (project) {
+        modalBody.innerHTML = `<h2>${project.title}</h2>${project.content}`;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+      }
+    });
+  });
+
+  // Close modal when clicking the X
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
+
+  // Close modal when clicking outside the modal content
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "block") {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+});
+

@@ -81,7 +81,31 @@
   <section id="project" class="project">
     <h2 class="section-title">Key Projects</h2>
 
-      <!-- 1rd -->
+      <!-- SOV Chatbot Project -->
+      <div class="project-container project-clickable" data-project="sov-chatbot">
+        <img src="./public/sov-chatbot-system-design.png" alt="SOV Chatbot for Underwriters" height="250" width="350" />
+      
+        <div class="project-content">
+          <h3>SOV Chatbot for Underwriters</h3>
+          <p style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+            <span style="display: block; margin-bottom: 0.25rem;">Built a RAG chatbot with tool-calling functionality to generate visualization for along with insights for SOV analysis</span>
+            <span style="display: block; margin-bottom: 0.25rem;">Engineered an automated data pipeline to extract, clean, and standardize Statement-of-Value (SoV) Excels</span>
+            <span style="display: block;">Fine-tuned BERT classifier (99% F1) on a custom dataset to filter non-insurance queries</span>
+          </p>
+      
+          <ul class="project-skill">
+            <li>LangChain</li>
+            <li>SQL</li>
+            <li>Pandas</li>
+            <li>DistilBERT</li>
+          </ul>
+
+          <p class="click-to-view">Click to view details →</p>
+        </div>
+      </div>
+
+
+      <!-- End-to-End Review Sentiment Analysis -->
       <div class="project-container">
         <img src="./public/sentiment.png" alt="Sentiment Analysis Web App" height="250" width="350" />
 
@@ -262,6 +286,15 @@
     </ul>
   </section>
   
+
+  <!-- Modal for Project Details -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
 
   <footer>
     <small>&copy; 2025-26 Kamesh Dubey</small>
