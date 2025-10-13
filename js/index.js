@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Organization:</strong> Bluepond AI, Chennai</p>
           <p><strong>Role:</strong> Data Science Intern</p>
           <p><strong>Mentor:</strong> Sunyam Bagga</p>
-          <p><strong>Tech Stack:</strong> Python, PyTorch, LangChain, SQL, Pandas, OpenAI API, Transformers (DistilBERT, Sentence Transformers)</p>
+          <p><strong>Tech Stack:</strong> Python, PyTorch, LangChain, SQL, Pandas, OpenAI API, Transformers (DistilBERT, Sentence Transformers), FastAPI</p>
         </div>
 
         <p>This project transforms how underwriters work with SOV Excel files, turning hours of manual data cleaning into seconds and days spreadsheet analysis into minutes of natural conversation with an AI assistant.</p>
