@@ -31,40 +31,46 @@
       <nav class="sidebar-nav">
         <ul id="nav">
           <li>
-            <a href="https://kameshcodes.github.io/portfolio/" class="nav-link">
+            <a href="#" class="nav-link" data-section="home" data-target-page="index">
               <i class="fas fa-home"></i>
               <span>Home</span>
             </a>
           </li>
           <li>
-            <a href="#project" class="nav-link">
+            <a href="#" class="nav-link" data-section="project" data-target-page="index">
               <i class="fas fa-project-diagram"></i>
               <span>Projects</span>
             </a>
           </li>
           <li>
-            <a href="#stack" class="nav-link">
+            <a href="#" class="nav-link" data-section="courses" data-target-page="index">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Courses</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-section="stack" data-target-page="index">
               <i class="fas fa-layer-group"></i>
               <span>Skills</span>
             </a>
           </li>
           <li>
-            <a href="#contact" class="nav-link">
-              <i class="fas fa-envelope"></i>
-              <span>Contact</span>
+            <a href="#" class="nav-link" data-section="blogs" data-target-page="blogs">
+              <i class="fas fa-blog"></i>
+              <span>Blogs</span>
             </a>
           </li>
           <li>
-            <a href="https://kameshcodes.github.io/portfolio/blogs" class="nav-link">
-              <i class="fas fa-blog"></i>
-              <span>Blogs</span>
+            <a href="./blogs.html?section=contact" class="nav-link" data-section="contact" data-target-page="blogs">
+              <i class="fas fa-envelope"></i>
+              <span>Contact</span>
             </a>
           </li>
         </ul>
       </nav>
       
       <!-- Download Resume -->
-      <a href="./public/resume/Resume_Kamesh_Dubey.pdf" download class="resume-download-btn">
+      <a href="./public/resume/Resume_Kamesh_Dubey.pdf" download="Resume_Kamesh_Dubey.pdf" class="resume-download-btn">
         <i aria-hidden="true" class="fas fa-download"></i>
         <span>Resume</span>
       </a>
@@ -83,12 +89,24 @@
 
   <div class="hero" id="hero">
     <h1 class="portfolio-title">
-      <span class="hero-name">Kamesh Dubey</span>
+      <span class="hero-name">
+        <span class="name-part kamesh">Kamesh</span> 
+        <span class="name-part dubey">Dubey</span>
+      </span>
     </h1>
     
     <div class="hero-content">
       <div class="hero-about-text">
         <p>Hello! I'm Kamesh Dubey, an Associate Consultant at KPMG, specializing in credit-risk modelling with a focus on ECL and scorecard development and validation. Previously, I interned at Bluepond AI, where I built intelligent document-extraction pipelines and a RAG-based chatbot to automate underwriting workflows. I hold an MSc in Applied Statistics and Informatics from IIT Bombay. I enjoy solving complex business problems through data, combining statistical modelling and machine learning to build transparent, scalable models that enhance the speed and quality of decision-making.</p>
+        
+        <div class="core-interests">
+          <h3 class="core-interests-title">Core Interests</h3>
+          <div class="core-interests-list">
+            <div class="core-interest-item">Risk Modelling</div>
+            <div class="core-interest-item">Statistical Modelling & Machine Learning</div>
+            <div class="core-interest-item">Deep Learning & Gen AI</div>
+          </div>
+        </div>
       </div>
 
       <div class="hero-experience">
@@ -99,7 +117,7 @@
         
         <div style="height: 8px;"></div>
 
-        <a class="resume" href="./public/resume/Resume_Kamesh_Dubey.pdf" target="_blank">
+        <a class="resume" href="./public/resume/Resume_Kamesh_Dubey.pdf" download="Resume_Kamesh_Dubey.pdf">
           <span class="btn">Resume</span>
         </a>
       </div>
@@ -219,78 +237,124 @@
 
 
 
+<br>
+<br>
+<br>
+<br>
 
 
 
-
-  <section id="stack" class="stack">
-    <h2 class="section-title">Skills</h2>
-    <div class="stack-container">
-  
-      <!-- Line 1: Python, R, SQL, AWS, GitHub Actions, Docker -->
-      <div class="tech-container">
-        <img src="./public/python.png" alt="Python Icon" class="tech-icon-close" style="width: 55px;" /> 
-        Python
+  <!-- COURSES UNDERTAKEN Section -->
+  <section id="courses" class="courses">
+    <h2 class="section-title">Courses Undertaken</h2>
+    
+    <div class="courses-section">
+      <!-- Two-Column Layout -->
+      <div class="courses-grid">
+        <!-- Left Column: Key Courses -->
+        <div class="course-column">
+          <h4 class="course-subheading">Key Courses</h4>
+          <div class="course-list">
+            <a href="https://www.ieor.iitb.ac.in/acad/courses/ie506" target="_blank" rel="noopener noreferrer" class="course-link">Machine Learning (IE 506)</a>
+            <a href="https://www.math.iitb.ac.in/assets/pdf/Msc_ASI_curriculum2021.pdf#page=7" target="_blank" rel="noopener noreferrer" class="course-link">Statistical Inference (SI 424)</a>
+            <a href="https://www.math.iitb.ac.in/assets/pdf/Msc_ASI_curriculum2021.pdf#page=10" target="_blank" rel="noopener noreferrer" class="course-link">Regression Analysis (SI 422)</a>
+            <a href="https://www.math.iitb.ac.in/assets/pdf/Msc_ASI_curriculum2021.pdf#page=20" target="_blank" rel="noopener noreferrer" class="course-link">Time Series Analysis (SI 509)</a>
+            <a href="https://www.math.iitb.ac.in/assets/pdf/Msc_ASI_curriculum2021.pdf#page=9" target="_blank" rel="noopener noreferrer" class="course-link">Optimization (SI 426)</a>
+          </div>
+        </div>
+        
+        <!-- Right Column: Online Certifications -->
+        <div class="course-column">
+          <h4 class="course-subheading">Online Certifications</h4>
+          <div class="course-list">
+            <a href="https://www.coursera.org/account/accomplishments/verify/AN94T5W72BOU" target="_blank" rel="noopener noreferrer" class="course-link">Generative AI with Large Language Models</a>
+            <a href="https://www.coursera.org/account/accomplishments/specialization/2XT6V3JG6MTM" target="_blank" rel="noopener noreferrer" class="course-link">Deep Learning Specialization</a>
+            <a href="https://www.datacamp.com/completed/statement-of-accomplishment/track/9b38deb448ff1e913d56bcee0c23f4046db3206a" target="_blank" rel="noopener noreferrer" class="course-link">Big Data with PySpark</a>
+            <a href="https://www.coursera.org/account/accomplishments/specialization/5LGDPGZKVKY9" target="_blank" rel="noopener noreferrer" class="course-link">Python 3 Programming</a>
+            <a href="https://www.datacamp.com/completed/statement-of-accomplishment/course/704762edc1215d919ac5c382b277abd2493d1248" target="_blank" rel="noopener noreferrer" class="course-link">Introduction to SQL</a>
+          </div>
+        </div>
       </div>
-  
-      <div class="tech-container">
-        <img src="./public/R.png" alt="R Icon" class="tech-icon-close" style="width: 80px;" /> 
-        R
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/sql.png" alt="SQL Icon" class="tech-icon-close" style="width: 50px;" /> 
-        SQL
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/aws.png" alt="AWS Icon" class="tech-icon-close" style="width: 75px;" /> 
-        AWS
-      </div>
-  
-      <div class="tech-container">
-        <i class="devicon-github-plain"></i>
-        GitHub Actions
-      </div>
-      
-      <div class="tech-container">
-        <i class="devicon-docker-plain colored"></i>
-        Docker
-      </div>
-
-      <!-- Line 2: NumPy, Pandas, Scikit-Learn, statsmodels, PyTorch, LangChain -->
-      <div class="tech-container">
-        <i class="devicon-numpy-plain colored"></i>
-        NumPy
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/pandas.png" alt="Pandas Icon" class="tech-icon-close" style="width: 55px;" /> 
-        Pandas
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/sklearn.png" alt="Sklearn Icon" class="tech-icon-close" style="width: 55px;" /> 
-        Scikit-Learn
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/statsmodels.png" alt="statsmodels Icon" class="tech-icon-close" style="width: 55px;" /> 
-        statsmodels
-      </div>
-  
-      <div class="tech-container">
-        <img src="./public/pytorch.png" alt="pytorch Icon" class="tech-icon-close" style="width: 55px;" /> 
-        PyTorch
-      </div>
-
-      <div class="tech-container">
-        <img src="./public/langchain.png" alt="LangChain Icon" class="tech-icon-close" style="width: 75px;" /> 
-        LangChain
-      </div>
-
     </div>
   </section>
+    
+  <!-- TECHNICAL SKILLS Section -->
+  <section id="stack" class="stack">
+    <h2 class="section-title">Technical Skills</h2>
+    
+    <div class="technical-skills-section">
+      <div class="stack-container">
+    
+        <!-- Line 1: Python, R, SQL, AWS, GitHub Actions, Docker -->
+        <div class="tech-container">
+          <img src="./public/python.png" alt="Python Icon" class="tech-icon-close" style="width: 55px;" /> 
+          <span class="tech-name">Python</span>
+        </div>
+    
+        <div class="tech-container">
+          <img src="./public/R.png" alt="R Icon" class="tech-icon-close" style="width: 80px;" /> 
+          <span class="tech-name">R</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/sql.png" alt="SQL Icon" class="tech-icon-close" style="width: 50px;" /> 
+          <span class="tech-name">SQL</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/aws.png" alt="AWS Icon" class="tech-icon-close" style="width: 75px;" /> 
+          <span class="tech-name">AWS</span>
+        </div>
+    
+        <div class="tech-container">
+          <i class="devicon-github-plain"></i>
+          <span class="tech-name">GitHub Actions</span>
+        </div>
+        
+        <div class="tech-container">
+          <i class="devicon-docker-plain colored"></i>
+          <span class="tech-name">Docker</span>
+        </div>
+
+        <!-- Line 2: NumPy, Pandas, Scikit-Learn, statsmodels, PyTorch, LangChain -->
+        <div class="tech-container">
+          <i class="devicon-numpy-plain colored"></i>
+          <span class="tech-name">NumPy</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/pandas.png" alt="Pandas Icon" class="tech-icon-close" style="width: 55px;" /> 
+          <span class="tech-name">Pandas</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/sklearn.png" alt="Sklearn Icon" class="tech-icon-close" style="width: 55px;" /> 
+          <span class="tech-name">Scikit-Learn</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/statsmodels.png" alt="statsmodels Icon" class="tech-icon-close" style="width: 55px;" /> 
+          <span class="tech-name">statsmodels</span>
+        </div>
+    
+        <div class="tech-container">
+          <img src="./public/pytorch.png" alt="pytorch Icon" class="tech-icon-close" style="width: 55px;" /> 
+          <span class="tech-name">PyTorch</span>
+        </div>
+
+        <div class="tech-container">
+          <img src="./public/langchain.png" alt="LangChain Icon" class="tech-icon-close" style="width: 75px;" /> 
+          <span class="tech-name">LangChain</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<br>
+<br>
+<br>
+<br>
   
   <section id="contact" class="contact">
     <h2 class="section-title">Hire Me</h2>

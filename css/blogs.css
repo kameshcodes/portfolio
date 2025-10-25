@@ -1,5 +1,127 @@
 #blogs-container {
   margin-top: 2rem;
+  min-height: 600px; /* Prevent layout shift during transitions */
+}
+
+.project-container {
+  display: flex;
+  margin-bottom: 2rem;
+  background-color: var(--bg-alt); 
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+/* Pagination Container */
+.pagination-container {
+  margin: 3rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.pagination {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 100%;
+}
+
+/* Pagination Button Base Styles */
+.pagination-btn {
+  min-width: 44px;
+  height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background-color: transparent;
+  color: var(--fg);
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  outline: none;
+}
+
+/* Hover State */
+.pagination-btn:hover:not(.disabled):not(.active) {
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: none;
+}
+
+/* Active Page */
+.pagination-btn.active {
+  background-color: transparent;
+  color: var(--primary);
+  border: none;
+  font-weight: 700;
+  font-size: 1.25rem;
+  transform: scale(1.25);
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Disabled State */
+.pagination-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Ellipsis */
+.pagination-btn[data-page="ellipsis"] {
+  border: none;
+  background: transparent;
+  cursor: default;
+  min-width: 32px;
+  font-weight: 700;
+  color: var(--fg-alt);
+}
+
+/* Previous/Next Buttons */
+.pagination-btn[data-page="prev"],
+.pagination-btn[data-page="next"] {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+}
+
+/* Focus State for Accessibility */
+.pagination-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(48, 108, 196, 0.2);
+}
+
+/* Keyboard Navigation Highlight */
+.pagination-btn:focus {
+  z-index: 1;
+}
+
+/* Active Button Press Effect */
+.pagination-btn:active:not(.disabled) {
+  transform: scale(0.95);
 }
 .project-container {
   display: flex;
@@ -11,26 +133,31 @@
 .project-image {
   flex: 0 0 40%;
 }
+
 .project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .project-content {
   flex: 1;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
 }
+
 .project-content h3 {
   color: var(--fg-alt); 
   margin-top: 0;
 }
+
 .project-content p {
   color: var(--fg); 
   flex-grow: 1;
 }
+
 .project-skill {
   list-style: none;
   padding: 0;
@@ -39,11 +166,38 @@
   justify-content: flex-center;
   align-items: center;
 }
+
+/* Button Styling - Match Index Page Exactly */
 .btn {
-  padding: 0.5em 1em;
+  display: inline-block;
+  border-radius: 5em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 1em 1.6em;
   background-color: var(--primary);
-  color: var(--bg);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(74, 158, 255, 0.2);
+  border: none;
+  cursor: pointer;
 }
+
+.btn:hover {
+  background-color: var(--primary-alt);
+  box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Contact Section Button Spacing */
+.contact .btn {
+  margin-right: 0.5em;
+  margin-top: 0.3em;
+}
+
+.contact .icon {
+  margin-right: 0.2em;
+}
+
 .eye-icon {
   color: var(--fg-alt); 
 }
@@ -51,11 +205,9 @@
 .blog-image {
   width: 350px;
   height: 250px;
-  object-fit: cover; /* Ensures the image covers the space without distortion */
+  object-fit: cover;
   border-radius: 8px;
 }
-
-
 
 .copy-notification {
   display: none;
@@ -72,4 +224,50 @@
   white-space: nowrap;
   z-index: 1;
   box-shadow: var(--container-shadow);
+}
+
+/* Responsive Pagination */
+@media (max-width: 768px) {
+  .pagination-buttons {
+    gap: 0.3rem;
+    padding: 0.5rem;
+  }
+  
+  .pagination-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .pagination-btn[data-page="prev"],
+  .pagination-btn[data-page="next"] {
+    font-size: 1.3rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .project-container {
+    flex-direction: column;
+  }
+  
+  .project-image {
+    flex: 0 0 auto;
+  }
+  
+  .blog-image {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-btn {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+  
+  .pagination-buttons {
+    gap: 0.25rem;
+  }
 }

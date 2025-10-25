@@ -32,94 +32,377 @@ navLinks.forEach(link => {
   });
 });
 
-// Smooth scroll navigation without hash in URL
+// Enhanced hover animation for hero name
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(".nav-link");
+  
+  // Check current page first
+  const currentPath = window.location.pathname;
+  const isOnBlogPage = currentPath.includes('blogs');
+  
+  // If on blog page, don't run any index page highlighting logic
+  if (isOnBlogPage) {
+    // Skip all index page initialization for blogs page
+    const heroName = document.querySelector('.hero-name');
+    // Run hero animation if element exists
+    if (heroName) {
+      setupHeroAnimation(heroName);
+    }
+    return; // Exit early, let blogs.js handle everything
+  }
+  
+  // Check if navigating from blog page - scroll to contact section
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('from') === 'blog') {
+    // Add slide-in animation from bottom
+    document.body.classList.add('slide-in-from-bottom');
+    
+    // Set flag to prevent observer interference
+    window.comingFromBlog = true;
+    
+    // Remove the query parameter from URL
+    window.history.replaceState({}, '', window.location.pathname);
+    
+    // Scroll to contact section immediately (before animation)
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      // Instant scroll without smooth behavior
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      
+      // Highlight contact link in sidebar IMMEDIATELY
+      const allNavLinks = document.querySelectorAll('.nav-link[data-section]');
+      allNavLinks.forEach(link => link.classList.remove('active'));
+      const contactLink = document.querySelector('.nav-link[data-section="contact"]');
+      if (contactLink) {
+        contactLink.classList.add('active');
+      }
+    }
+    
+    // Clean up animation class and re-enable observer after animation
+    setTimeout(() => {
+      document.body.classList.remove('slide-in-from-bottom');
+      // Re-enable observer immediately after animation
+      window.comingFromBlog = false;
+    }, 0);
+  } else {
+    // Normal page load - set Home as active if not coming from blog
+    const allNavLinks = document.querySelectorAll('.nav-link[data-section]');
+    
+    // Only highlight home if we're on index page
+    allNavLinks.forEach(link => link.classList.remove('active'));
+    const homeLink = document.querySelector('.nav-link[data-section="home"]');
+    if (homeLink) {
+      homeLink.classList.add('active');
+    }
+  }
+  
+  const heroName = document.querySelector('.hero-name');
+  
+  if (heroName) {
+    let isHovering = false;
+    let animationTimeout;
+    let entryPoint = 0;
+    
+    // Mouse enter handler
+    heroName.addEventListener('mouseenter', (e) => {
+      isHovering = true;
+      
+      // Calculate exact mouse position relative to element
+      const rect = heroName.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const elementWidth = rect.width;
+      const percentage = Math.max(0, Math.min(100, (mouseX / elementWidth) * 100));
+      
+      // Store the entry point
+      entryPoint = percentage;
+      
+      // Set the mouse position for the gradient
+      heroName.style.setProperty('--mouse-position', `${percentage}%`);
+      
+      // Add animating class to trigger the animation
+      heroName.classList.add('animating');
+    });
+    
+    // Mouse move handler for continuous tracking
+    heroName.addEventListener('mousemove', (e) => {
+      if (!isHovering) return;
+      
+      const rect = heroName.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const elementWidth = rect.width;
+      const percentage = Math.max(0, Math.min(100, (mouseX / elementWidth) * 100));
+      
+      // Update the gradient position based on current mouse position
+      heroName.style.setProperty('--mouse-position', `${percentage}%`);
+    });
+    
+    // Mouse leave handler
+    heroName.addEventListener('mouseleave', () => {
+      isHovering = false;
+      
+      // Clear any existing timeout
+      if (animationTimeout) {
+        clearTimeout(animationTimeout);
+      }
+      
+      // Remove animating class after transition completes
+      animationTimeout = setTimeout(() => {
+        heroName.classList.remove('animating');
+        // Reset mouse position
+        heroName.style.setProperty('--mouse-position', '0%');
+      }, 400);
+    });
+  }
+});
+
+// Enhanced navigation with data-section attributes
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".nav-link[data-section]");
+  
+  // Map data-section to actual section IDs
+  const sectionIdMap = {
+    'home': 'hero',
+    'project': 'project',
+    'stack': 'stack',
+    'contact': 'contact'
+  };
   
   navLinks.forEach(link => {
     link.addEventListener("click", (e) => {
-      const href = link.getAttribute("href");
+      e.preventDefault();
       
-      // Check if it's an internal anchor link (starts with #)
-      if (href && href.startsWith("#")) {
-        e.preventDefault();
+      const section = link.getAttribute("data-section");
+      const targetPage = link.getAttribute("data-target-page");
+      const currentPage = window.location.pathname.includes('blogs') ? 'blogs' : 'index';
+      
+      // Special handling for Contact - always go to blogs page with section parameter
+      if (section === 'contact' && targetPage === 'blogs') {
+        window.location.href = './blogs.html?section=contact';
+        return;
+      }
+      
+      // Get the actual section ID to scroll to
+      const actualSectionId = sectionIdMap[section] || section;
+      const targetElement = document.getElementById(actualSectionId);
+      
+      if (targetElement && (targetPage === 'current' || targetPage === currentPage || targetPage === 'index')) {
+        // Immediately update active state for instant feedback
+        navLinks.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
         
-        const targetId = href.substring(1);
-        const targetSection = document.getElementById(targetId);
+        // Smooth scroll to section on current page
+        const headerOffset = 80; // Account for fixed header
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         
-        if (targetSection) {
-          // Smooth scroll to section
-          targetSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-          
-          // Update active state
-          navLinks.forEach(l => l.classList.remove("active"));
-          link.classList.add("active");
-        }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      } else if (targetPage === 'blogs' && section === 'blogs') {
+        // Navigate to blogs page
+        window.location.href = './blogs.html';
+      } else if (targetPage === 'blogs') {
+        // Navigate to blogs page with section
+        window.location.href = `./blogs.html?section=${section}`;
+      } else {
+        // Navigate to different page with query parameter
+        const targetUrl = targetPage === 'index' ? './index.html' : './blogs.html';
+        const queryParam = `?section=${section}`;
+        window.location.href = targetUrl + queryParam;
       }
     });
   });
+  
+  // Handle page load with section query parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetSection = urlParams.get('section');
+  
+  if (targetSection) {
+    // Wait for page to load, then scroll to section
+    setTimeout(() => {
+      const actualSectionId = sectionIdMap[targetSection] || targetSection;
+      const element = document.getElementById(actualSectionId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        
+        // Update active state
+        const correspondingLink = document.querySelector(`[data-section="${targetSection}"]`);
+        if (correspondingLink) {
+          navLinks.forEach(l => l.classList.remove("active"));
+          correspondingLink.classList.add("active");
+        }
+      }
+    }, 100);
+  }
 });
 
-// Active Section Detection with Intersection Observer
+// Active Section Detection with Intersection Observer - Enhanced and Fixed
 document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll("section[id], .hero[id], #top");
-  const allNavLinks = document.querySelectorAll(".nav-link");
+  // Skip intersection observer on blog page
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('blogs')) {
+    return; // Exit early for blog page
+  }
   
-  // Create a map of section IDs to nav links
-  const sectionMap = {
-    'hero': document.querySelector('.nav-link[href*="portfolio/"]'),
-    'top': document.querySelector('.nav-link[href*="portfolio/"]'),
-    'project': document.querySelector('.nav-link[href="#project"]'),
-    'stack': document.querySelector('.nav-link[href="#stack"]'),
-    'contact': document.querySelector('.nav-link[href="#contact"]')
+  const sections = document.querySelectorAll("section[id], .hero[id], #top");
+  const allNavLinks = document.querySelectorAll(".nav-link[data-section]");
+  
+  // Flag to prevent observer interference when coming from blog
+  let comingFromBlog = false;
+  
+  // Create a map of section IDs to nav links with proper mapping
+  const sectionToNavMap = {
+    'hero': 'home',      // Hero section maps to Home nav
+    'top': 'home',       // Top also maps to Home
+    'project': 'project',
+    'courses': 'courses',
+    'stack': 'stack',
+    'contact': 'contact'
   };
   
-  // Intersection Observer options
+  // Create reverse map for easy lookup
+  const navLinkMap = {};
+  allNavLinks.forEach(link => {
+    const section = link.getAttribute("data-section");
+    if (section) {
+      navLinkMap[section] = link;
+    }
+  });
+  
+  // Intersection Observer options - optimized for better detection
   const observerOptions = {
     root: null,
-    rootMargin: '-20% 0px -60% 0px', // Trigger when section is in the middle third of viewport
-    threshold: [0, 0.25, 0.5, 0.75, 1]
+    rootMargin: '-10% 0px -70% 0px', // Trigger when section enters top 10-30% of viewport
+    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
   };
   
   let currentActive = null;
+  let isManualScroll = false;
   
   const observerCallback = (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const sectionId = entry.target.id || 'top';
-        const correspondingLink = sectionMap[sectionId];
-        
-        if (correspondingLink && correspondingLink !== currentActive) {
-          // Remove active class from all links
-          allNavLinks.forEach(link => link.classList.remove('active'));
-          
-          // Add active class to current link
-          correspondingLink.classList.add('active');
-          currentActive = correspondingLink;
+    // Skip if user just clicked a nav link or coming from blog
+    if (isManualScroll || window.comingFromBlog) return;
+    
+    // Sort entries by intersection ratio (highest first)
+    const sortedEntries = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => {
+        // Prioritize entries with higher intersection ratio
+        if (b.intersectionRatio !== a.intersectionRatio) {
+          return b.intersectionRatio - a.intersectionRatio;
         }
+        // If equal, prioritize entries closer to top of viewport
+        return a.boundingClientRect.top - b.boundingClientRect.top;
+      });
+    
+    if (sortedEntries.length > 0) {
+      const topEntry = sortedEntries[0];
+      const sectionId = topEntry.target.id || 'top';
+      
+      // Map the actual section ID to the nav link data-section
+      const navSection = sectionToNavMap[sectionId] || sectionId;
+      const correspondingLink = navLinkMap[navSection];
+      
+      if (correspondingLink && correspondingLink !== currentActive) {
+        // Remove active class from all links with transition
+        allNavLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+        
+        // Add active class to current link
+        correspondingLink.classList.add('active');
+        currentActive = correspondingLink;
       }
-    });
+    }
   };
   
   const observer = new IntersectionObserver(observerCallback, observerOptions);
   
-  // Observe all sections
-  sections.forEach(section => observer.observe(section));
+  // Observe all sections EXCEPT contact (which is now on blog page)
+  sections.forEach(section => {
+    if (section.id !== 'contact') {
+      observer.observe(section);
+    }
+  });
   
-  // Set initial active state based on current page
-  const currentPath = window.location.pathname;
+  // Enhanced click handler with manual scroll flag
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      // Set manual scroll flag
+      isManualScroll = true;
+      
+      // Immediately update active state
+      allNavLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      currentActive = link;
+      
+      // Reset flag after scroll completes
+      setTimeout(() => {
+        isManualScroll = false;
+      }, 1000);
+    });
+  });
   
-  if (currentPath.includes('blogs')) {
-    const blogsLink = document.querySelector('.nav-link[href*="blogs"]');
-    if (blogsLink) blogsLink.classList.add('active');
-  } else {
-    // Default to Home
-    const homeLink = document.querySelector('.nav-link[href*="portfolio/"]');
-    if (homeLink) homeLink.classList.add('active');
-  }
+  // Set initial active state based on scroll position or current page
+  const setInitialActive = () => {
+    const currentPath = window.location.pathname;
+    
+    // Don't do anything if coming from blog - it's already set
+    if (window.comingFromBlog) {
+      return;
+    }
+    
+    // Clear all active states first
+    allNavLinks.forEach(link => link.classList.remove('active'));
+    
+    if (currentPath.includes('blogs')) {
+      const blogsLink = navLinkMap['blogs'];
+      if (blogsLink) {
+        blogsLink.classList.add('active');
+        currentActive = blogsLink;
+      }
+      return; // Exit early to prevent activating other links
+    } else {
+      // Check which section is currently in view
+      let activeSet = false;
+      
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const isInView = rect.top >= 0 && rect.top <= window.innerHeight * 0.3;
+        
+        if (isInView && !activeSet) {
+          const sectionId = section.id || 'top';
+          const navSection = sectionToNavMap[sectionId] || sectionId;
+          const correspondingLink = navLinkMap[navSection];
+          
+          if (correspondingLink) {
+            correspondingLink.classList.add('active');
+            currentActive = correspondingLink;
+            activeSet = true;
+          }
+        }
+      });
+      
+      // Default to Home if nothing is in view
+      if (!activeSet) {
+        const homeLink = navLinkMap['home'];
+        if (homeLink) {
+          homeLink.classList.add('active');
+          currentActive = homeLink;
+        }
+      }
+    }
+  };
+  
+  // Set initial active state after a brief delay
+  setTimeout(setInitialActive, 100);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -390,5 +673,71 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.overflow = "auto";
     }
   });
+
+  // =====================================
+  // Page Navigation Gestures with Smooth Transitions
+  // =====================================
+
+  // Check scroll position
+  function isAtPageBottom() {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const clientHeight = window.innerHeight;
+    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+    return distanceFromBottom <= 50;
+  }
+
+  // Smooth page transition function
+  function navigateWithSlideTransition(url) {
+    // Instant navigation - no animation delay
+    window.location.href = url;
+  }
+
+  // Track scroll for gesture detection
+  let isNavigating = false;
+  const currentPath = window.location.pathname;
+  const isOnBlogPage = currentPath.includes('blogs');
+
+  // Wheel event for gesture detection at page bottom
+  let wheelDeltaAccumulator = 0;
+  let wheelTimeout;
+
+  window.addEventListener('wheel', (e) => {
+    if (isNavigating) return;
+
+    clearTimeout(wheelTimeout);
+    wheelDeltaAccumulator += e.deltaY;
+
+    wheelTimeout = setTimeout(() => {
+      // Strong downward scroll at bottom -> navigate to blogs
+      if (!isOnBlogPage && isAtPageBottom() && wheelDeltaAccumulator > 100) {
+        isNavigating = true;
+        navigateWithSlideTransition('./blogs.html?from=index');
+      }
+      
+      wheelDeltaAccumulator = 0;
+    }, 10);
+  }, { passive: true });
+
+  // Touch gesture support
+  let touchStartY = 0;
+  let touchEndY = 0;
+
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (isNavigating) return;
+    
+    touchEndY = e.changedTouches[0].clientY;
+    const swipeDistance = touchStartY - touchEndY;
+
+    // Swipe up (scroll down) from bottom -> go to blogs
+    if (!isOnBlogPage && isAtPageBottom() && swipeDistance > 50) {
+      isNavigating = true;
+      navigateWithSlideTransition('./blogs.html?from=index');
+    }
+  }, { passive: true });
 });
 
