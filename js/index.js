@@ -1,24 +1,124 @@
-const btnHamburger = document.querySelector(".fa-bars");
+// Sidebar Toggle for Mobile
+const sidebarToggle = document.getElementById("sidebarToggle");
+const sidebar = document.getElementById("sidebar");
+const mainWrapper = document.querySelector(".main-wrapper");
 
-const nav = document.getElementById("nav");
+if (sidebarToggle) {
+  sidebarToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("sidebar-open");
+  });
+}
 
-btnHamburger.addEventListener("click", () => {
-  if (nav.classList.contains("navOpen")) {
-    nav.classList.remove("navOpen");
-  } else {
-    nav.classList.add("navOpen");
-  }
+// Close sidebar when clicking outside on mobile
+if (mainWrapper) {
+  document.addEventListener("click", (e) => {
+    if (window.innerWidth <= 968 && 
+        sidebar.classList.contains("sidebar-open") &&
+        !sidebar.contains(e.target) &&
+        !sidebarToggle.contains(e.target)) {
+      sidebar.classList.remove("sidebar-open");
+    }
+  });
+}
+
+// Close sidebar when clicking on a nav link (mobile)
+const navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    if (window.innerWidth <= 968) {
+      sidebar.classList.remove("sidebar-open");
+    }
+  });
 });
 
-const btnTheme = document.getElementById("toggleTheme");
+// Smooth scroll navigation without hash in URL
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".nav-link");
+  
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      
+      // Check if it's an internal anchor link (starts with #)
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        
+        const targetId = href.substring(1);
+        const targetSection = document.getElementById(targetId);
+        
+        if (targetSection) {
+          // Smooth scroll to section
+          targetSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+          
+          // Update active state
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+        }
+      }
+    });
+  });
+});
 
-btnTheme.addEventListener("click", () => {
-  if (document.body.classList.contains("body-light")) {
-    document.body.classList.add("body-dark");
-    document.body.classList.remove("body-light");
+// Active Section Detection with Intersection Observer
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section[id], .hero[id], #top");
+  const allNavLinks = document.querySelectorAll(".nav-link");
+  
+  // Create a map of section IDs to nav links
+  const sectionMap = {
+    'hero': document.querySelector('.nav-link[href*="portfolio/"]'),
+    'top': document.querySelector('.nav-link[href*="portfolio/"]'),
+    'project': document.querySelector('.nav-link[href="#project"]'),
+    'stack': document.querySelector('.nav-link[href="#stack"]'),
+    'contact': document.querySelector('.nav-link[href="#contact"]')
+  };
+  
+  // Intersection Observer options
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -60% 0px', // Trigger when section is in the middle third of viewport
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  };
+  
+  let currentActive = null;
+  
+  const observerCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.id || 'top';
+        const correspondingLink = sectionMap[sectionId];
+        
+        if (correspondingLink && correspondingLink !== currentActive) {
+          // Remove active class from all links
+          allNavLinks.forEach(link => link.classList.remove('active'));
+          
+          // Add active class to current link
+          correspondingLink.classList.add('active');
+          currentActive = correspondingLink;
+        }
+      }
+    });
+  };
+  
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  
+  // Observe all sections
+  sections.forEach(section => observer.observe(section));
+  
+  // Set initial active state based on current page
+  const currentPath = window.location.pathname;
+  
+  if (currentPath.includes('blogs')) {
+    const blogsLink = document.querySelector('.nav-link[href*="blogs"]');
+    if (blogsLink) blogsLink.classList.add('active');
   } else {
-    document.body.classList.add("body-light");
-    document.body.classList.remove("body-dark");
+    // Default to Home
+    const homeLink = document.querySelector('.nav-link[href*="portfolio/"]');
+    if (homeLink) homeLink.classList.add('active');
   }
 });
 
@@ -105,7 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-// TypeIt: "Hi, I'm Kamesh Dubey..." with realistic typing effect and error correction
+// TypeIt animation disabled - using static text instead
+/*
 document.addEventListener("DOMContentLoaded", () => {
   console.log('DOM loaded, starting TypeIt setup');
   const target = document.getElementById("heroTitle");
@@ -122,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof TypeIt === 'undefined') {
     console.log('TypeIt not loaded, using fallback');
     // Fallback to complete text
-    target.innerHTML = 'Hi, I\'m <br><span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span>';
+    target.innerHTML = '<span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span>';
     return;
   }
 
@@ -153,8 +254,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   })
-  .type("Hi, I'm ")
-  .pause(200)           // Natural pause before name
   .type('<span class="hero-name">Kamesh</span><br><span class="hero-name">dube</span>', { html: true }) // Intentionally lowercase first
   .pause(700)           // Pause to "notice" the error
   .delete(4)           
@@ -164,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
   .type('<span class="hero-name">...</span>', { html: true })          // Add three dots at the end
   .go();                // Start the animation
 });
+*/
 
 // Project Modal Functionality
 document.addEventListener("DOMContentLoaded", () => {

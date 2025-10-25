@@ -9,7 +9,7 @@
     <meta name="keywords"
         content="Machine Learning Engineer, ML, portfolio, personal website, SQL, Python, Machine Learning, Deep Learning, Generative AI, Statistics" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5008414277567291"
         crossorigin="anonymous"></script>
@@ -20,35 +20,66 @@
     <title>Kamesh Dubey</title>
 </head>
 
-<body class="body-light">
-    <header id="top">
-        <a class="icon-border header-title" href="https://kameshcodes.github.io/portfolio/">Kameshcodes</a>
-        <nav>
-            <ul id="nav">
-                <li>
-                    <a href="https://kameshcodes.github.io/portfolio/" class="link">Home</a>
-                </li>
-                <li>
-                    <a href="https://kameshcodes.github.io/portfolio/#project" class="link">Projects</a>
-                </li>
-                <li>
-                    <a href="https://kameshcodes.github.io/portfolio/#stack" class="link">Tech Stack</a>
-                </li>
-                <li>
-                    <a href="https://kameshcodes.github.io/portfolio/#contact" class="link">Contact</a>
-                </li>
-                <li>
-                    <a href="https://kameshcodes.github.io/portfolio/blogs" class="link">Blogs</a>
-                </li>
-            </ul>
-            <button aria-label="Toggle theme" id="toggleTheme">
-              <i aria-hidden="true" class="icon-normal fas fa-moon"></i>
-            </button>
-            <button aria-label="Toggle navbar">
-              <i aria-hidden="true" class="icon-normal fas fa-bars"></i>
-            </button>
-          </nav>
-    </header>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <!-- Profile Photo -->
+            <a href="https://kameshcodes.github.io/portfolio/" class="sidebar-profile">
+                <img src="./public/kamesh_photo.png" alt="Kamesh Dubey Profile" class="profile-photo">
+            </a>
+            
+            <!-- Navigation Menu -->
+            <nav class="sidebar-nav">
+                <ul id="nav">
+                    <li>
+                        <a href="https://kameshcodes.github.io/portfolio/" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://kameshcodes.github.io/portfolio/#project" class="nav-link">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://kameshcodes.github.io/portfolio/#stack" class="nav-link">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Skills</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://kameshcodes.github.io/portfolio/#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://kameshcodes.github.io/portfolio/blogs" class="nav-link active">
+                            <i class="fas fa-blog"></i>
+                            <span>Blogs</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Download Resume Button -->
+            <a href="./public/resume/Kamesh_Dubey_Resume.pdf" download="Kamesh_Dubey_Resume.pdf" class="resume-download-btn">
+                <i class="fas fa-download"></i>
+                <span>Download Resume</span>
+            </a>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button aria-label="Toggle sidebar" id="sidebarToggle" class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper" id="top">
 
     <main>
 
@@ -270,6 +301,8 @@
           </a>
         </div>
       </div>
+      </div> <!-- End Main Wrapper -->
+      
       <script src="./js/index.js"></script>
 </body>
     
