@@ -38,15 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(scrollToContact, 50);
     });
     
-    // Clean up URL after scrolling
-    setTimeout(() => {
-      window.history.replaceState({}, '', window.location.pathname);
-    }, 300);
-  } else {
-    // Normal blog page load - highlight Blog
+    // Don't clean up URL - keep ?section=contact in the URL
+  } else if (targetSection === 'blogs' || !targetSection) {
+    // Normal blog page load - highlight Blog and set URL
     const blogLink = document.querySelector('.nav-link[data-section="blogs"]');
     if (blogLink) {
       blogLink.classList.add('active');
+    }
+    
+    // Set URL to ?section=blogs if not already set
+    if (!targetSection) {
+      window.history.replaceState({section: 'blogs'}, '', `${window.location.pathname}?section=blogs`);
     }
     
     // Force it again after a tiny delay to override any other scripts
@@ -80,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     'home': 'hero',
     'project': 'project',
     'courses': 'courses',
-    'stack': 'stack',
+    'skills': 'skills',
     'contact': 'contact',
     'blogs': 'blogs'
   };
@@ -100,10 +102,41 @@ document.addEventListener("DOMContentLoaded", () => {
         allNavLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
         
+        // Update URL with section parameter
+        const newUrl = `${window.location.pathname}?section=contact`;
+        window.history.pushState({section: 'contact'}, '', newUrl);
+        
         const contactSection = document.getElementById('contact');
         if (contactSection) {
           contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+        return;
+      }
+      
+      // Handle Blogs link on blog page - scroll to top/blogs section
+      if (section === 'blogs' && targetPage === 'blogs') {
+        e.preventDefault();
+        
+        // Immediately update active state
+        const allNavLinks = document.querySelectorAll('.nav-link[data-section]');
+        allNavLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        // Update URL with section parameter
+        const newUrl = `${window.location.pathname}?section=blogs`;
+        window.history.pushState({section: 'blogs'}, '', newUrl);
+        
+        const blogsSection = document.getElementById('blogs');
+        if (blogsSection) {
+          blogsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+      }
+      
+      // Handle Home link on blog page - scroll to top
+      if (section === 'home' && targetPage === 'index') {
+        e.preventDefault();
+        window.location.href = './index.html?section=home';
         return;
       }
       
@@ -453,29 +486,55 @@ if (contactSection) {
     threshold: [0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1]
   };
 
-  const contactObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const allNavLinks = document.querySelectorAll('.nav-link[data-section]');
+  let currentActiveSection = null;
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    // Sort entries by intersection ratio (highest first)
+    const sortedEntries = entries
+      .filter(entry => entry.isIntersecting && entry.intersectionRatio > 0.05)
+      .sort((a, b) => {
+        if (b.intersectionRatio !== a.intersectionRatio) {
+          return b.intersectionRatio - a.intersectionRatio;
+        }
+        return a.boundingClientRect.top - b.boundingClientRect.top;
+      });
+
+    if (sortedEntries.length > 0) {
+      const topEntry = sortedEntries[0];
+      const sectionId = topEntry.target.id;
       
-      if (entry.isIntersecting && entry.intersectionRatio > 0.05) {
-        // Contact section is visible - highlight Contact
+      // Map section IDs to nav section names
+      const sectionMap = {
+        'blogs': 'blogs',
+        'contact': 'contact'
+      };
+      
+      const navSection = sectionMap[sectionId] || sectionId;
+      
+      if (navSection !== currentActiveSection) {
+        currentActiveSection = navSection;
+        
+        // Update active nav link
+        const allNavLinks = document.querySelectorAll('.nav-link[data-section]');
         allNavLinks.forEach(link => link.classList.remove('active'));
-        const contactLink = document.querySelector('.nav-link[data-section="contact"]');
-        if (contactLink) {
-          contactLink.classList.add('active');
+        
+        const activeLink = document.querySelector(`.nav-link[data-section="${navSection}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
         }
-      } else if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
-        // Contact section not visible and is below viewport - highlight Blog
-        allNavLinks.forEach(link => link.classList.remove('active'));
-        const blogLink = document.querySelector('.nav-link[data-section="blogs"]');
-        if (blogLink) {
-          blogLink.classList.add('active');
-        }
+        
+        // Update URL with section parameter
+        const newUrl = `${window.location.pathname}?section=${navSection}`;
+        window.history.replaceState({section: navSection}, '', newUrl);
       }
-    });
+    }
   }, observerOptions);
 
-  contactObserver.observe(contactSection);
+  // Observe all sections
+  const blogsSection = document.getElementById('blogs');
+  
+  if (blogsSection) sectionObserver.observe(blogsSection);
+  if (contactSection) sectionObserver.observe(contactSection);
 }
 
 

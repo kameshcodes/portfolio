@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sectionIdMap = {
     'home': 'hero',
     'project': 'project',
-    'stack': 'stack',
+    'skills': 'skills',
     'contact': 'contact'
   };
   
@@ -188,6 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Immediately update active state for instant feedback
         navLinks.forEach(l => l.classList.remove("active"));
         link.classList.add("active");
+        
+        // Update URL with section parameter
+        const newUrl = `${window.location.pathname}?section=${section}`;
+        window.history.pushState({section: section}, '', newUrl);
         
         // Smooth scroll to section on current page
         const headerOffset = 80; // Account for fixed header
@@ -263,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     'top': 'home',       // Top also maps to Home
     'project': 'project',
     'courses': 'courses',
-    'stack': 'stack',
+    'skills': 'skills',
     'contact': 'contact'
   };
   
@@ -319,6 +323,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add active class to current link
         correspondingLink.classList.add('active');
         currentActive = correspondingLink;
+        
+        // Update URL with section parameter
+        const newUrl = `${window.location.pathname}?section=${navSection}`;
+        window.history.replaceState({section: navSection}, '', newUrl);
       }
     }
   };
@@ -487,66 +495,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 2000);
     }
   });
-
-// TypeIt animation disabled - using static text instead
-/*
-document.addEventListener("DOMContentLoaded", () => {
-  console.log('DOM loaded, starting TypeIt setup');
-  const target = document.getElementById("heroTitle");
-  
-  if (!target) {
-    console.error('Target element not found');
-    return;
-  }
-
-  // Clear any existing content first
-  target.innerHTML = '';
-
-  // Check if TypeIt is available
-  if (typeof TypeIt === 'undefined') {
-    console.log('TypeIt not loaded, using fallback');
-    // Fallback to complete text
-    target.innerHTML = '<span class="hero-name">Kamesh</span><br><span class="hero-name">Dubey</span>';
-    return;
-  }
-
-  console.log('TypeIt loaded successfully');
-
-  // Initialize TypeIt with realistic human-like typing
-  new TypeIt(target, {
-    speed: 70,          // Average typing speed
-    deleteSpeed: 120,     // Speed for corrections
-    lifeLike: true,      // Variable delays to mimic human typing
-    cursor: false,       // No cursor during or after typing
-    loop: false,         // Don't repeat
-    waitUntilVisible: true, // Start when element is visible
-    afterComplete: function(instance) {
-      // Make only the final dot blink
-      console.log('TypeIt completed, making final dot blink');
-      const targetElement = instance.getElement();
-      console.log('Current HTML:', targetElement.innerHTML);
-      
-      // Find the span containing "..." and replace the last dot
-      const heroSpans = targetElement.querySelectorAll('.hero-name');
-      heroSpans.forEach((span, index) => {
-        console.log(`Span ${index}: "${span.textContent}"`);
-        if (span.textContent === '...') {
-          console.log('Found dots span, making last dot blink');
-          span.innerHTML = '..<span class="blinking-dot">.</span>';
-        }
-      });
-    }
-  })
-  .type('<span class="hero-name">Kamesh</span><br><span class="hero-name">dube</span>', { html: true }) // Intentionally lowercase first
-  .pause(700)           // Pause to "notice" the error
-  .delete(4)           
-  .pause(300)           // Brief pause before correction
-  .type('<span class="hero-name">Dubey</span>', { html: true }) // Correct only "Dubey"
-  .pause(400)           // Pause before dots
-  .type('<span class="hero-name">...</span>', { html: true })          // Add three dots at the end
-  .go();                // Start the animation
-});
-*/
 
 // Project Modal Functionality
 document.addEventListener("DOMContentLoaded", () => {
@@ -739,5 +687,41 @@ document.addEventListener("DOMContentLoaded", () => {
       navigateWithSlideTransition('./blogs.html?from=index');
     }
   }, { passive: true });
+});
+
+// Resume Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const viewResumeBtn = document.getElementById('viewResumeBtn');
+  const resumeModal = document.getElementById('resumeModal');
+  const resumeModalClose = document.getElementById('resumeModalClose');
+  const resumeFrame = document.getElementById('resumeFrame');
+
+  if (viewResumeBtn) {
+    viewResumeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      resumeFrame.src = './public/resume/Resume_Kamesh_Dubey.pdf';
+      resumeModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  }
+
+  if (resumeModalClose) {
+    resumeModalClose.addEventListener('click', function() {
+      resumeModal.style.display = 'none';
+      resumeFrame.src = '';
+      document.body.style.overflow = 'auto';
+    });
+  }
+
+  // Close modal when clicking outside
+  if (resumeModal) {
+    resumeModal.addEventListener('click', function(e) {
+      if (e.target === resumeModal) {
+        resumeModal.style.display = 'none';
+        resumeFrame.src = '';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
 });
 

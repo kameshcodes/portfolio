@@ -23,7 +23,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-content">
       <!-- Profile Photo -->
-      <a href="https://kameshcodes.github.io/portfolio/" class="sidebar-profile">
+      <a href="./index.html?section=home" class="sidebar-profile">
         <img src="./public/kamesh_photo.png" alt="Kamesh Dubey Profile" class="profile-photo">
       </a>
       
@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link" data-section="stack" data-target-page="index">
+            <a href="#" class="nav-link" data-section="skills" data-target-page="index">
               <i class="fas fa-layer-group"></i>
               <span>Skills</span>
             </a>
@@ -68,12 +68,6 @@
           </li>
         </ul>
       </nav>
-      
-      <!-- Download Resume -->
-      <a href="./public/resume/Resume_Kamesh_Dubey.pdf" download="Resume_Kamesh_Dubey.pdf" class="resume-download-btn">
-        <i aria-hidden="true" class="fas fa-download"></i>
-        <span>Resume</span>
-      </a>
     </div>
     
     <!-- Mobile Menu Toggle -->
@@ -90,8 +84,7 @@
   <div class="hero" id="hero">
     <h1 class="portfolio-title">
       <span class="hero-name">
-        <span class="name-part kamesh">Kamesh</span> 
-        <span class="name-part dubey">Dubey</span>
+        <span class="name-first">Kamesh</span> <span class="name-last">Dubey</span>
       </span>
     </h1>
     
@@ -110,15 +103,30 @@
       </div>
 
       <div class="hero-experience">
-        <div><b>Associate Consultant (FRM), KPMG</b> <span style="font-weight:normal; font-style:italic;">(Jun'23 - Present)</span></div>
-        <div><b>Ex-Data Scientist Intern, Bluepond AI</b> <span style="font-weight:normal; font-style:italic;">(Apr-May'23)</span></div>
-        <div><b>MSc. Applied Statistics and Informatics</b></div>
-        <div><b>IIT BOMBAY</b></div>
-        
-        <div style="height: 8px;"></div>
+        <!-- Experience Chiplet -->
+        <div class="info-chiplet">
+          <h3 class="chiplet-title">Experience</h3>
+          <div class="chiplet-item">
+            <div class="chiplet-role"><b>Associate Consultant (FRM), KPMG</b></div>
+            <div class="chiplet-date">Jun'25 - Present</div>
+          </div>
+          <div class="chiplet-item">
+            <div class="chiplet-role"><b>Data Scientist Intern, Bluepond AI</b></div>
+            <div class="chiplet-date">Apr-May'25</div>
+          </div>
+        </div>
 
-        <a class="resume" href="./public/resume/Resume_Kamesh_Dubey.pdf" download="Resume_Kamesh_Dubey.pdf">
-          <span class="btn">Resume</span>
+        <!-- Education Chiplet -->
+        <div class="info-chiplet">
+          <h3 class="chiplet-title">Education</h3>
+          <div class="chiplet-item">
+            <div class="chiplet-role"><b>MSc. Applied Statistics and Informatics</b></div>
+            <div class="chiplet-location">IIT BOMBAY</div>
+          </div>
+        </div>
+
+        <a class="resume" href="#" id="viewResumeBtn">
+          <span class="btn">View Resume</span>
         </a>
       </div>
     </div>
@@ -247,7 +255,6 @@
   <!-- COURSES UNDERTAKEN Section -->
   <section id="courses" class="courses">
     <h2 class="section-title">Courses Undertaken</h2>
-    
     <div class="courses-section">
       <!-- Two-Column Layout -->
       <div class="courses-grid">
@@ -279,11 +286,11 @@
   </section>
     
   <!-- TECHNICAL SKILLS Section -->
-  <section id="stack" class="stack">
+  <section id="skills" class="skills">
     <h2 class="section-title">Technical Skills</h2>
     
     <div class="technical-skills-section">
-      <div class="stack-container">
+      <div class="skills-container">
     
         <!-- Line 1: Python, R, SQL, AWS, GitHub Actions, Docker -->
         <div class="tech-container">
@@ -357,7 +364,7 @@
 <br>
   
   <section id="contact" class="contact">
-    <h2 class="section-title">Hire Me</h2>
+    <h2 class="section-title">Contact Me</h2>
     <ul>
       <li style="position: relative;">
         <button class="btn" id="copyEmailButton">
@@ -401,6 +408,14 @@
     </div>
   </div>
 
+  <!-- Modal for Resume -->
+  <div id="resumeModal" class="modal">
+    <div class="modal-content resume-modal-content">
+      <span class="modal-close" id="resumeModalClose">&times;</span>
+      <iframe id="resumeFrame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
 
   <footer>
     <small>&copy; 2025-26 Kamesh Dubey</small>
@@ -416,7 +431,6 @@
   </div>
   </div> <!-- End Main Wrapper -->
   
-  <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
