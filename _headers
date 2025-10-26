@@ -1,0 +1,30 @@
+# HTML - 5 minutes for quick updates
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+# CSS - 1 day
+/*.css
+  Cache-Control: public, max-age=86400, immutable
+
+# JavaScript - 1 day
+/*.js
+  Cache-Control: public, max-age=86400, immutable
+
+# Images - 1 day
+/*.png
+  Cache-Control: public, max-age=86400, immutable
+/*.jpg
+  Cache-Control: public, max-age=86400, immutable
+/*.jpeg
+  Cache-Control: public, max-age=86400, immutable
+
+# Fonts - 1 week
+/*.woff2
+  Cache-Control: public, max-age=604800, immutable
+/*.woff
+  Cache-Control: public, max-age=604800, immutable
+
+# PDF - 1 day
+/*.pdf
+  Cache-Control: public, max-age=86400
+
