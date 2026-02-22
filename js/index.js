@@ -137,20 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loop: false,         // Don't repeat
     waitUntilVisible: true, // Start when element is visible
     afterComplete: function(instance) {
-      // Make only the final dot blink
-      console.log('TypeIt completed, making final dot blink');
-      const targetElement = instance.getElement();
-      console.log('Current HTML:', targetElement.innerHTML);
-      
-      // Find the span containing "..." and replace the last dot
-      const heroSpans = targetElement.querySelectorAll('.hero-name');
-      heroSpans.forEach((span, index) => {
-        console.log(`Span ${index}: "${span.textContent}"`);
-        if (span.textContent === '...') {
-          console.log('Found dots span, making last dot blink');
-          span.innerHTML = '..<span class="blinking-dot">.</span>';
-        }
-      });
+      // no trailing dots to blink any more
     }
   })
   .type("Hi, I'm ")
@@ -160,8 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
   .delete(4)           
   .pause(300)           // Brief pause before correction
   .type('<span class="hero-name">Dubey</span>', { html: true }) // Correct only "Dubey"
-  .pause(400)           // Pause before dots
-  .type('<span class="hero-name">...</span>', { html: true })          // Add three dots at the end
+  .pause(400)           // Pause before finishing
   .go();                // Start the animation
 });
 

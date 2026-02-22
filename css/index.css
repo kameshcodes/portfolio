@@ -236,6 +236,20 @@ section {
   display: block;
   width: 1.5em;
   border-bottom: 0.2em solid var(--primary);
+  /* animate up/down to hint at scrolling */
+  animation: scrollHint 1.4s ease-in-out infinite alternate;
+}
+
+/* animation for section underline to move down/up */
+@keyframes scrollHint {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(6px);
+    opacity: 0.6;
+  }
 }
 
 .project-container {
