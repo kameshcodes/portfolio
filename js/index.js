@@ -247,6 +247,27 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>What I learned</h3>
         <p>Beyond the tech side of the project, I learned that building useful AI is about reliability and trust, not complexity. The real value came from thoughtful system design. Intelligent query filtering eliminated hallucinations and cut costs, the hybrid ETL pipeline proved that GenAI + Python logic can create stable systems, and the RAG architecture compressed days of analysis into minutes.</p>
       `
+    },
+    "ssrf": {
+      title: "Semi-Supervised Random Forest",
+      content: `
+        <div class="project-meta">
+          <p><strong>Algorithm:</strong> Semi-Supervised Random Forest (SSRF)</p>
+          <p><strong>Dataset:</strong> scikit-learn digits (30 labeled, 1 227 unlabeled, 540 test)</p>
+          <p><strong>Stack:</strong> Python, scikit-learn, uv, numpy, pandas</p>
+        </div>
+
+        <p>Code mimics the structure of the <a href="https://github.com/kameshcodes/semi-supervised-random-forest" target="_blank">original repository</a>. It uses deterministic annealing with margin-based pseudo-labeling to gradually incorporate unlabeled data.</p>
+
+        <h3>Highlights</h3>
+        <ul>
+          <li>Quickstart with <code>uv venv && uv sync && python main.py</code></li>
+          <li>Structured project files: <code>src/</code>, <code>config.py</code>, <code>main.py</code></li>
+          <li>Benchmark shows +3‑4% gain over supervised RF on digits test set</li>
+        </ul>
+
+        <p>Refer to the detailed page or GitHub repo for more information.</p>
+      `
     }
   };
 
