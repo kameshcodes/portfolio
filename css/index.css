@@ -287,6 +287,18 @@ section {
   line-height: 1.6;
 }
 
+.click-to-view {
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+}
+
+.click-to-view:hover {
+  color: var(--primary);
+  filter: brightness(0.8);
+}
+
 .project-skill,
 .project-link {
   display: flex;
