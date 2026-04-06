@@ -30,6 +30,7 @@
 .project-content p {
   color: var(--fg); 
   flex-grow: 1;
+  font-size: 0.945rem;
 }
 .project-skill {
   list-style: none;

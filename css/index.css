@@ -84,7 +84,7 @@ body {
   width: 95%;
   background-color: var(--bg);
   color: var(--fg);
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   transition: background-color 0.1s linear;
 }
@@ -98,6 +98,7 @@ h4 {
 }
 
 h1 {
+  font-family: "Poppins", sans-serif;
   font-size: 5rem;
 }
 
@@ -180,6 +181,10 @@ footer {
   align-items: center;
 }
 
+.hero {
+  align-items: flex-start;
+}
+
 header {
   height: 5em;
   justify-content: space-between;
@@ -191,7 +196,7 @@ nav li {
 }
 
 .hero {
-  margin-top: 6em;
+  margin-top: 16vh;
   justify-content: space-between;
 }
 
@@ -217,6 +222,7 @@ nav li {
 
 .hero-about .btn {
   margin-top: 2.2em;
+  padding: 1em 1.94em;
 }
 
 section {
@@ -277,6 +283,8 @@ section {
 
 .project-content p {
   margin: 1.2em 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .project-skill,
@@ -302,6 +310,56 @@ section {
 
 .project-link {
   margin-top: 1.2em;
+  gap: 1.5em;
+}
+
+.project-link-labeled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  padding: 0.4em 2.5em 0.25em;
+  border-radius: 0.5em;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.project-link-labeled:hover {
+  background-color: var(--primary);
+}
+
+.project-link-labeled .icon-border {
+  border: none;
+  width: auto;
+  height: auto;
+  font-size: 1.2rem;
+  color: var(--primary);
+  transition: color 0.2s ease;
+}
+
+/* Disable the icon's own hover effect inside labeled links */
+.project-link-labeled .icon-border::after {
+  display: none;
+}
+
+.project-link-labeled:hover .icon-border {
+  color: var(--bg);
+}
+
+.link-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-top: 0.15em;
+  transition: color 0.2s ease;
+}
+
+.project-link-labeled:hover .link-label {
+  color: var(--bg);
 }
 
 .stack-container {

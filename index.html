@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio website of Kamesh Dubey" />
   <meta name="keywords" content="Machine Learning Engineer, ML, portfolio, personal website, SQL, Python, Machine Learning, Deep Learning, Generative AI, Statistics" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5008414277567291"
     crossorigin="anonymous"></script>
@@ -57,29 +57,64 @@
     
     <div class="hero-about">
       <div class="hero-experience"></div>
+        <p style="font-size: 1.1rem; line-height: 1.6; color: var(--fg-alt); margin-top: 0.75em; font-weight: 600; font-family: 'Space Grotesk', sans-serif;">Quantitative Analyst building at the intersection of risk, Generative AI, and statistical modeling.</p>
         <div><br></div>
-        <div><br></div>
-        <div><br></div>
-        <div><b>Associate Consultant (FRM), KPMG</b> <span style="font-weight:normal; font-style:italic;">(Jun'23 - Present)</span></div>
-        <div><b>Ex-Data Scientist Intern, Bluepond AI</b> <span style="font-weight:normal; font-style:italic;">(Apr-May'23)</span></div>
-        <div><b>MSc. Applied Statistics and Informatics</b></div>
-        <div><b>IIT BOMBAY</b></div>
+        <div style="font-size: 0.9rem;">Associate Consultant (FRM), KPMG <span style="font-style:italic;">(Jun'23 - Present)</span></div>
+        <div style="font-size: 0.9rem;">Ex-Data Scientist Intern, Bluepond AI <span style="font-style:italic;">(Apr-May'23)</span></div>
+        <div style="font-size: 0.9rem;">MSc. Applied Statistics and Informatics</div>
+        <div style="font-size: 0.9rem;">IIT BOMBAY</div>
         
         <div style="height: 8px;"></div>
 
-        <a class="resume" href="./public/resume/Resume_Kamesh_Dubey.pdf" target="_blank">
-          <span class="btn">Resume</span>
-        </a>
+        <div style="text-align: center;">
+          <a class="resume" href="./public/resume/Resume_Kamesh_Dubey.pdf" target="_blank">
+            <span class="btn">Resume</span>
+          </a>
+        </div>
       </div>
   </div>
 
-<br>
-<br>
-<br>
-<br>
+  <div style="height: 24vh;"></div>
 
   <section id="project" class="project">
     <h2 class="section-title">Key Projects</h2>
+
+      <!-- VaR Engine Project -->
+      <div class="project-container">
+        <img src="./public/var.png" alt="VaR Engine - Value at Risk Calculator" height="250" width="420" />
+
+        <div class="project-content">
+          <h3>VaR Engine</h3>
+          <p>
+            <span style="display: block; margin-bottom: 0.25rem;">Interactive web-app to compute VaR and ES using Historical and Parametric apporach with stressed VaR/ES</span>
+            <span style="display: block;">Generates audit-ready Excel reports with embedded formula-driven calculations</span>
+          </p>
+
+          <ul class="project-skill">
+            <li>Python</li>
+            <li>Gradio</li>
+            <li>Pandas</li>
+          </ul>
+
+          <ul class="project-link">
+            <li>
+              <a href="https://github.com/kameshcodes/value-at-risk/" aria-label="Source code"
+                title="Source code on GitHub" rel="noopener" class="project-link-labeled">
+                <i class="icon-border fas fa-code"></i>
+                <span class="link-label">Code</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://huggingface.co/spaces/kameshcodes/value-at-risk" aria-label="Live Demo"
+                title="Live Demo" rel="noopener" class="project-link-labeled">
+                <i aria-hidden="true" class="icon-border fas fa-external-link-alt"></i>
+                <span class="link-label">Demo</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
 
       <!-- SOV Chatbot Project -->
       <div class="project-container project-clickable" data-project="sov-chatbot">
@@ -87,7 +122,7 @@
       
         <div class="project-content">
           <h3>SOV Chatbot for Underwriters</h3>
-          <p style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+          <p>
             <span style="display: block; margin-bottom: 0.25rem;">Built a RAG chatbot with tool-calling functionality to generate visualization for along with insights for SOV analysis</span>
             <span style="display: block; margin-bottom: 0.25rem;">Engineered an automated data pipeline to extract, clean, and standardize Statement-of-Value (SoV) Excels</span>
             <span style="display: block;">Fine-tuned BERT classifier (99.54% F1) on a custom dataset to filter non-insurance queries</span>
@@ -127,12 +162,11 @@
           <ul class="project-link">
             <li>
               <a href="https://github.com/kameshcodes/reviews-sentiment-analysis-project/tree/dev" aria-label="Source code"
-                title="source code" rel="noopener"><i class="icon-border fas fa-code"></i></a>
+                title="source code" rel="noopener" class="project-link-labeled">
+                <i class="icon-border fas fa-code"></i>
+                <span class="link-label">Code</span>
+              </a>
             </li>
-            <!-- <li>
-              <a href="https://github.com/kameshcodes/End-to-End-Review-Sentiment-Analysis" aria-label="Preview" title="preview"
-                rel="noopener"><i aria-hidden="true" class="icon-border fas fa-external-link-alt"></i></a>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -164,8 +198,9 @@
               <a href="https://github.com/kameshcodes/semi-supervised-random-forest"
                 aria-label="Source code"
                 title="Source code on GitHub"
-                rel="noopener">
+                rel="noopener" class="project-link-labeled">
                 <i class="icon-border fas fa-code"></i>
+                <span class="link-label">Code</span>
               </a>
             </li>
           </ul>
@@ -188,8 +223,9 @@
       
           <ul class="project-link">
             <li>
-              <a href="https://github.com/kameshcodes/SI-505-Multivariate-Analysis-Course-Project" aria-label="Source code" title="source code" rel="noopener">
+              <a href="https://github.com/kameshcodes/SI-505-Multivariate-Analysis-Course-Project" aria-label="Source code" title="source code" rel="noopener" class="project-link-labeled">
                 <i class="icon-border fas fa-code"></i>
+                <span class="link-label">Code</span>
               </a>
             </li>
           </ul>
