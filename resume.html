@@ -15,6 +15,7 @@
 </head>
 
 <body class="body-light">
+  <script>if(localStorage.getItem("theme")==="dark"){document.body.classList.replace("body-light","body-dark")}</script>
   <header id="top">
     <a class="icon-border header-title" href="https://kameshcodes.github.io/portfolio/">kameshcodes</a>
     <nav>
@@ -73,46 +74,8 @@
     </div>
   </div>
 
-  <script>
-    // Theme toggle
-    const body = document.body;
-    const themeBtn = document.querySelector('#toggleTheme');
-    const navBtn = document.querySelector('.fa-bars');
-    const nav = document.querySelector('#nav');
-
-    themeBtn.addEventListener('click', () => {
-      body.classList.toggle('body-light');
-      body.classList.toggle('body-dark');
-      const icon = themeBtn.querySelector('i');
-      icon.classList.toggle('fa-moon');
-      icon.classList.toggle('fa-sun');
-    });
-
-    // Mobile nav toggle
-    if (navBtn) {
-      navBtn.addEventListener('click', () => {
-        nav.classList.toggle('navOpen');
-      });
-    }
-
-    // Scroll-to-top visibility
-    const scrollUp = document.querySelector('.scroll-up');
-    if (scrollUp) {
-      window.addEventListener('scroll', () => {
-        scrollUp.style.display = window.scrollY > 300 ? 'block' : 'none';
-      });
-    }
-
-    // Force download resume PDF
-    document.getElementById('downloadResume').addEventListener('click', function() {
-      const link = document.createElement('a');
-      link.href = './public/resume/Resume_Kamesh_Dubey.pdf';
-      link.download = 'Resume_Kamesh_Dubey.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-  </script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/resume.js"></script>
 </body>
 
 </html>
