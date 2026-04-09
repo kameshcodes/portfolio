@@ -1,0 +1,44 @@
+/* Resume Page Styles */
+
+/* Download button */
+.resume-actions {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 540px;
+  margin: -0.5em auto 0.5em;
+  padding: 0 1em;
+}
+
+.resume-actions .btn {
+  font-size: 0.7rem;
+  padding: 0.6em 1.19em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+/* Resume image container */
+.resume-embed {
+  max-width: 540px;
+  margin: 0 auto 0.5em;
+  padding: 0 1em;
+}
+
+.resume-embed img {
+  width: 100%;
+  display: block;
+  border-radius: 0.3em;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+}
+
+.body-dark .resume-embed img {
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.35),
+    0 0 50px rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 580px) {
+  .resume-actions {
+    justify-content: center;
+  }
+}
